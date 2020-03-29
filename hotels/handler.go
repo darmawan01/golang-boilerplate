@@ -6,9 +6,8 @@ import (
 	"github.com/jackc/pgx"
 )
 
-var rows *pgx.Rows
-
 func (api *HotelsApi) allHandler() (hotels []Hotel, err error) {
+	var rows *pgx.Rows
 	if rows, err = api.Db.Query(`SELECT * FROM hotels`); err != nil {
 		return
 	}

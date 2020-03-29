@@ -1,15 +1,15 @@
 package main
 
 import (
-	"kodingworks/guests"
-	"kodingworks/hotels"
+	guests "kodingworks/guests"
+	hotels "kodingworks/hotels"
 	orderGuests "kodingworks/order_guests"
 	orderItems "kodingworks/order_items"
-	"kodingworks/orders"
+	orders "kodingworks/orders"
 	roomAvailabalities "kodingworks/room_availabilities"
 	roomRates "kodingworks/room_rates"
-	"kodingworks/rooms"
-	"kodingworks/utils"
+	rooms "kodingworks/rooms"
+	utils "kodingworks/utils"
 
 	"log"
 	"net/http"
@@ -49,7 +49,7 @@ func main() {
 	log.Println("DB Port :\t ", config.DbPort)
 	log.Println("DB Name :\t ", config.DbName)
 	log.Println("DB User :\t ", config.DbUser)
-	log.Println("-----------------------")
+	log.Println("----------------------------")
 	log.Println("Registered Apps:")
 
 	// Init DB
@@ -125,5 +125,11 @@ func initDb(c *conf) (dbConnPool *pgx.ConnPool) {
 }
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	utils.RespondwithJSON(w, http.StatusOK, utils.FormatData("Kodingworks test...", nil))
+	utils.RespondwithJSON(
+		w,
+		http.StatusOK,
+		map[string]interface{}{
+			"message": "Kodingworks test...",
+		},
+	)
 }
