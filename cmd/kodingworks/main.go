@@ -72,7 +72,7 @@ func main() {
 	ordersAPI := orders.OrdersApi{Router: api, Db: dbConnPool}
 	ordersAPI.Register()
 
-	orderItemsAPI := orderItems.OrderItemSApi{Router: api, Db: dbConnPool}
+	orderItemsAPI := orderItems.OrderItemsApi{Router: api, Db: dbConnPool}
 	orderItemsAPI.Register()
 
 	orderGuestsAPI := orderGuests.OrderGuestSApi{Router: api, Db: dbConnPool}
