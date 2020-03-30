@@ -16,11 +16,11 @@ type RoomsApi struct {
 }
 
 func (api *RoomsApi) Register() {
-	api.Router.Handle("/order-guests", http.HandlerFunc(api.all)).Methods("GET")
-	api.Router.Handle("/order-guests", http.HandlerFunc(api.add)).Methods("POST")
-	api.Router.Handle("/order-guests/{id}", http.HandlerFunc(api.detail)).Methods("GET")
-	api.Router.Handle("/order-guests/{id}", http.HandlerFunc(api.update)).Methods("PUT")
-	api.Router.Handle("/order-guests/{id}", http.HandlerFunc(api.delete)).Methods("DELETE")
+	api.Router.Handle("/rooms", http.HandlerFunc(api.all)).Methods("GET")
+	api.Router.Handle("/rooms", http.HandlerFunc(api.add)).Methods("POST")
+	api.Router.Handle("/rooms/{id}", http.HandlerFunc(api.detail)).Methods("GET")
+	api.Router.Handle("/rooms/{id}", http.HandlerFunc(api.update)).Methods("PUT")
+	api.Router.Handle("/rooms/{id}", http.HandlerFunc(api.delete)).Methods("DELETE")
 
 	log.Println("RoomsApi registered")
 }
@@ -40,12 +40,14 @@ func (api *RoomsApi) all(w http.ResponseWriter, r *http.Request) {
 }
 
 func (api *RoomsApi) add(w http.ResponseWriter, r *http.Request) {
-	body, err := utils.BodyToStruct(r.Body)
+	room, err := api.bodyToStruct(r.Body)
 	if err != nil {
-		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		utils.RespondwithJSON(w, http.StatusBadRequest,
+			utils.ErrFormat("Invalid body", nil),
+		)
 		return
 	}
-	room := body.(Room)
+
 	if ok, err := utils.ValidateStruct(room); !ok && err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat(err.Error(), nil))
@@ -71,14 +73,14 @@ func (api *RoomsApi) add(w http.ResponseWriter, r *http.Request) {
 
 func (api *RoomsApi) detail(w http.ResponseWriter, r *http.Request) {
 
-	hotelId := utils.GetIDParam(r)
-	if utils.IsEmpty(hotelId) {
+	roomId := utils.GetIDParam(r)
+	if utils.IsEmpty(roomId) {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat("Required hotel_id as param", nil),
 		)
 	}
 
-	id, err := strconv.Atoi(hotelId)
+	id, err := strconv.Atoi(roomId)
 	if err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat("Type of hotel_id is invalid", nil),
@@ -96,26 +98,28 @@ func (api *RoomsApi) detail(w http.ResponseWriter, r *http.Request) {
 }
 
 func (api *RoomsApi) update(w http.ResponseWriter, r *http.Request) {
-	hotelId := utils.GetIDParam(r)
-	if utils.IsEmpty(hotelId) {
+	roomId := utils.GetIDParam(r)
+	if utils.IsEmpty(roomId) {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat("Required hotel_id as param", nil),
 		)
 	}
 
-	id, err := strconv.Atoi(hotelId)
+	id, err := strconv.Atoi(roomId)
 	if err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat("Type of hotel_id is invalid", nil),
 		)
 	}
 
-	body, err := utils.BodyToStruct(r.Body)
+	updated, err := api.bodyToStruct(r.Body)
 	if err != nil {
-		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		utils.RespondwithJSON(w, http.StatusBadRequest,
+			utils.ErrFormat("Invalid body", nil),
+		)
 		return
 	}
-	updated := body.(Room)
+
 	if ok, err := utils.ValidateStruct(updated); !ok && err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat(err.Error(), nil),
@@ -153,18 +157,20 @@ func (api *RoomsApi) update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.RespondwithJSON(w, http.StatusOK, nil)
+	utils.RespondwithJSON(w, http.StatusOK, map[string]interface{}{
+		"messages": "Success !",
+	})
 }
 
 func (api *RoomsApi) delete(w http.ResponseWriter, r *http.Request) {
-	hotelId := utils.GetIDParam(r)
-	if utils.IsEmpty(hotelId) {
+	roomId := utils.GetIDParam(r)
+	if utils.IsEmpty(roomId) {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat("Required hotel_id as param", nil),
 		)
 	}
 
-	id, err := strconv.Atoi(hotelId)
+	id, err := strconv.Atoi(roomId)
 	if err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat("Type of hotel_id is invalid", nil),
@@ -182,5 +188,7 @@ func (api *RoomsApi) delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.RespondwithJSON(w, http.StatusOK, nil)
+	utils.RespondwithJSON(w, http.StatusOK, map[string]interface{}{
+		"messages": "Success !",
+	})
 }

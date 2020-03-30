@@ -6,7 +6,7 @@ import (
 	orderGuests "kodingworks/order_guests"
 	orderItems "kodingworks/order_items"
 	orders "kodingworks/orders"
-	roomAvailabalities "kodingworks/room_availabilities"
+	roomAvailabality "kodingworks/room_availabilities"
 	roomRates "kodingworks/room_rates"
 	rooms "kodingworks/rooms"
 	utils "kodingworks/utils"
@@ -35,7 +35,7 @@ func main() {
 	// Configurations
 	config = &conf{
 		AppPort: 8000,
-		DbPort:  5432,
+		DbPort:  65432,
 		DbHost:  "localhost",
 		DbUser:  "kodingworks",
 		DbPass:  "kodingworks",
@@ -81,10 +81,10 @@ func main() {
 	roomsAPI := rooms.RoomsApi{Router: api, Db: dbConnPool}
 	roomsAPI.Register()
 
-	roomRatesAPI := roomRates.RoomRateSApi{Router: api, Db: dbConnPool}
+	roomRatesAPI := roomRates.RoomRatesApi{Router: api, Db: dbConnPool}
 	roomRatesAPI.Register()
 
-	roomAvailabilitiesAPI := roomAvailabalities.RoomAvailabilitiesApi{Router: api, Db: dbConnPool}
+	roomAvailabilitiesAPI := roomAvailabality.RoomAvailabilitiesApi{Router: api, Db: dbConnPool}
 	roomAvailabilitiesAPI.Register()
 
 	// Serve

@@ -40,12 +40,14 @@ func (api *GuestsApi) all(w http.ResponseWriter, r *http.Request) {
 }
 
 func (api *GuestsApi) add(w http.ResponseWriter, r *http.Request) {
-	body, err := utils.BodyToStruct(r.Body)
+	guest, err := api.bodyToStruct(r.Body)
 	if err != nil {
-		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		utils.RespondwithJSON(w, http.StatusBadRequest,
+			utils.ErrFormat("Invalid body", nil),
+		)
 		return
 	}
-	guest := body.(Guest)
+
 	if ok, err := utils.ValidateStruct(guest); !ok && err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat(err.Error(), nil))
@@ -110,12 +112,14 @@ func (api *GuestsApi) update(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	body, err := utils.BodyToStruct(r.Body)
+	updated, err := api.bodyToStruct(r.Body)
 	if err != nil {
-		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		utils.RespondwithJSON(w, http.StatusBadRequest,
+			utils.ErrFormat("Invalid body", nil),
+		)
 		return
 	}
-	updated := body.(Guest)
+
 	if ok, err := utils.ValidateStruct(updated); !ok && err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat(err.Error(), nil),
@@ -153,7 +157,9 @@ func (api *GuestsApi) update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.RespondwithJSON(w, http.StatusOK, nil)
+	utils.RespondwithJSON(w, http.StatusOK, map[string]interface{}{
+		"messages": "Success !",
+	})
 }
 
 func (api *GuestsApi) delete(w http.ResponseWriter, r *http.Request) {
@@ -182,5 +188,7 @@ func (api *GuestsApi) delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.RespondwithJSON(w, http.StatusOK, nil)
+	utils.RespondwithJSON(w, http.StatusOK, map[string]interface{}{
+		"messages": "Success !",
+	})
 }

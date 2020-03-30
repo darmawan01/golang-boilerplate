@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/jackc/pgx"
@@ -40,12 +41,14 @@ func (api *HotelsApi) all(w http.ResponseWriter, r *http.Request) {
 }
 
 func (api *HotelsApi) add(w http.ResponseWriter, r *http.Request) {
-	body, err := utils.BodyToStruct(r.Body)
+	hotel, err := api.bodyToStruct(r.Body)
 	if err != nil {
-		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		utils.RespondwithJSON(w, http.StatusBadRequest,
+			utils.ErrFormat("Invalid body", nil),
+		)
 		return
 	}
-	hotel := body.(Hotel)
+
 	if ok, err := utils.ValidateStruct(hotel); !ok && err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat(err.Error(), nil))
@@ -55,6 +58,11 @@ func (api *HotelsApi) add(w http.ResponseWriter, r *http.Request) {
 
 	lastInsertedId, err := api.addHandler(hotel)
 	if err != nil {
+		if strings.Contains(err.Error(), "duplicate") {
+			utils.RespondwithJSON(w, http.StatusBadRequest,
+				utils.ErrFormat("Hotel name is exist !", nil))
+			return
+		}
 		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
 		return
 
@@ -110,12 +118,13 @@ func (api *HotelsApi) update(w http.ResponseWriter, r *http.Request) {
 		)
 	}
 
-	body, err := utils.BodyToStruct(r.Body)
+	updated, err := api.bodyToStruct(r.Body)
 	if err != nil {
-		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		utils.RespondwithJSON(w, http.StatusBadRequest,
+			utils.ErrFormat("Invalid body", nil),
+		)
 		return
 	}
-	updated := body.(Hotel)
 	if ok, err := utils.ValidateStruct(updated); !ok && err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat(err.Error(), nil),
@@ -142,6 +151,8 @@ func (api *HotelsApi) update(w http.ResponseWriter, r *http.Request) {
 		hotel.Longitude = updated.Longitude
 	}
 
+	log.Println(hotel)
+
 	if err = api.updateHandler(hotel); err != nil {
 		if !utils.IsEqual(err.Error(), "failed-to-update") {
 			utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
@@ -153,7 +164,9 @@ func (api *HotelsApi) update(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.RespondwithJSON(w, http.StatusOK, nil)
+	utils.RespondwithJSON(w, http.StatusOK, map[string]interface{}{
+		"messages": "Success !",
+	})
 }
 
 func (api *HotelsApi) delete(w http.ResponseWriter, r *http.Request) {
@@ -182,5 +195,7 @@ func (api *HotelsApi) delete(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	utils.RespondwithJSON(w, http.StatusOK, nil)
+	utils.RespondwithJSON(w, http.StatusOK, map[string]interface{}{
+		"messages": "Success !",
+	})
 }

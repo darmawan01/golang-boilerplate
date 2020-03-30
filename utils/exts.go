@@ -2,7 +2,6 @@ package utils
 
 import (
 	"encoding/json"
-	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -82,12 +81,4 @@ func ValidateStruct(model interface{}) (bool, error) {
 		return false, err
 	}
 	return true, nil
-}
-
-// BodyToStruct help to validate struct
-func BodyToStruct(body io.ReadCloser) (model interface{}, err error) {
-	if err = json.NewDecoder(body).Decode(&model); err != nil {
-		return
-	}
-	return
 }

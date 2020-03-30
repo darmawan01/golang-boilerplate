@@ -10,8 +10,8 @@ migrate_clean:
 migrate:
 	@cp -a */migrations/deploy/*.sql db/migrations
 	@docker run --rm -v ${PWD}/db/migrations:/migrations --network host migrate/migrate\
-    	-path=/migrations/ -database postgres://kodingworks:kodingworks@localhost:5432/kodingworks?sslmode=disable up
+    	-path=/migrations/ -database postgres://kodingworks:kodingworks@localhost:65432/kodingworks?sslmode=disable up
 
 native_migrate:
 	@cp -a */migrations/deploy/*.sql db/migrations
-	@migrate -path db/migrations/ -database "postgres://kodingworks:kodingworks@localhost:5432/kodingworks?sslmode=disable" up
+	@migrate -path db/migrations/ -database "postgres://kodingworks:kodingworks@localhost:65432/kodingworks?sslmode=disable" up
