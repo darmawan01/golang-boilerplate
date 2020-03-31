@@ -1,0 +1,16 @@
+{
+    "heroku": {
+        "DB_HOST": "ec2-54-157-78-113.compute-1.amazonaws.com",
+        "DB_PORT": 5432,
+        "DB_NAME": "d3ll9fit5qi1bh",
+        "DB_USER": "obqutqnwosixcv",
+        "DB_PASS": "7ffa0b47a51d0104a57731a2a5c4b3043cc5834b2c1d5d3f6b6c30a43f03d442"
+    },
+    "local": {
+        "DB_HOST": "localhost",
+        "DB_PORT": 65432,
+        "DB_NAME": "kodingworks",
+        "DB_USER": "kodingworks",
+        "DB_PASS": "kodingworks"
+    }
+}

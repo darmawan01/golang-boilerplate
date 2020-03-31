@@ -10,6 +10,7 @@ import (
 	roomRates "kodingworks/room_rates"
 	rooms "kodingworks/rooms"
 	utils "kodingworks/utils"
+	"os"
 
 	"log"
 	"net/http"
@@ -18,6 +19,7 @@ import (
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/jackc/pgx"
+	"github.com/spf13/viper"
 )
 
 type conf struct {
@@ -32,14 +34,27 @@ type conf struct {
 var config *conf
 
 func main() {
+
+	viper.SetConfigFile("./config.json")
+	if err := viper.ReadInConfig(); err != nil {
+		log.Fatalf("Error reading config file, %s", err)
+	}
+	mode := ""
+	if len(os.Getenv("LOCAL")) > 0 {
+		mode = "local"
+	} else {
+		mode = "heroku"
+	}
+
+	c := viper.Sub(mode)
 	// Configurations
 	config = &conf{
 		AppPort: 8000,
-		DbPort:  65432,
-		DbHost:  "localhost",
-		DbUser:  "kodingworks",
-		DbPass:  "kodingworks",
-		DbName:  "kodingworks",
+		DbPort:  c.GetInt("DB_PORT"),
+		DbHost:  c.GetString("DB_HOST"),
+		DbUser:  c.GetString("DB_USER"),
+		DbPass:  c.GetString("DB_PASS"),
+		DbName:  c.GetString("DB_NAME"),
 	}
 
 	log.Println("Server is running on port " + strconv.Itoa(config.AppPort))
