@@ -57,6 +57,14 @@ func main() {
 		DbName:  c.GetString("DB_NAME"),
 	}
 
+	if mode == "heroku" {
+		herokuPort, err := strconv.Atoi(os.Getenv("PORT"))
+		if err != nil {
+			log.Fatal(err)
+		}
+		config.AppPort = herokuPort
+	}
+
 	log.Println("Server is running on port " + strconv.Itoa(config.AppPort))
 	log.Println("Configurations:")
 	log.Println("App Port:\t ", config.AppPort)
