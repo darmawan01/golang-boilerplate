@@ -14,11 +14,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/hotels",
+							"raw": "{{BASE_URL}}/api/v1/hotels",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -34,11 +33,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/hotels/1",
+							"raw": "{{BASE_URL}}/api/v1/hotels/1",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -71,11 +69,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/hotels/1",
+							"raw": "{{BASE_URL}}/api/v1/hotels/1",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -108,11 +105,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/hotels",
+							"raw": "{{BASE_URL}}/api/v1/hotels",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -128,11 +124,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/hotels/8",
+							"raw": "{{BASE_URL}}/api/v1/hotels/8",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -171,11 +166,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/rooms",
+							"raw": "{{BASE_URL}}/api/v1/rooms",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -191,11 +185,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/rooms",
+							"raw": "{{BASE_URL}}/api/v1/rooms",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -211,11 +204,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/rooms/2",
+							"raw": "{{BASE_URL}}/api/v1/rooms/2",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -248,11 +240,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/rooms/2",
+							"raw": "{{BASE_URL}}/api/v1/rooms/2",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -269,11 +260,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/rooms/6",
+							"raw": "{{BASE_URL}}/api/v1/rooms/6",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -296,11 +286,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/guests",
+							"raw": "{{BASE_URL}}/api/v1/guests",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -316,11 +305,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/guests/3",
+							"raw": "{{BASE_URL}}/api/v1/guests/3",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -353,11 +341,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/guests/3",
+							"raw": "{{BASE_URL}}/api/v1/guests/3",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -390,11 +377,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/guests",
+							"raw": "{{BASE_URL}}/api/v1/guests",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -410,11 +396,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/guests/6",
+							"raw": "{{BASE_URL}}/api/v1/guests/6",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -437,11 +422,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/room-rates",
+							"raw": "{{BASE_URL}}/api/v1/room-rates",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -457,11 +441,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/room-rates/2",
+							"raw": "{{BASE_URL}}/api/v1/room-rates/2",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -494,11 +477,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/room-rates/2",
+							"raw": "{{BASE_URL}}/api/v1/room-rates/2",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -531,11 +513,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/room-rates",
+							"raw": "{{BASE_URL}}/api/v1/room-rates",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -551,11 +532,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/room-rates/6",
+							"raw": "{{BASE_URL}}/api/v1/room-rates/6",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -578,11 +558,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/room-availability",
+							"raw": "{{BASE_URL}}/api/v1/room-availability",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -598,11 +577,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/room-availability/2",
+							"raw": "{{BASE_URL}}/api/v1/room-availability/2",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -635,11 +613,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/room-availability/2",
+							"raw": "{{BASE_URL}}/api/v1/room-availability/2",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -672,11 +649,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/room-availability",
+							"raw": "{{BASE_URL}}/api/v1/room-availability",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -692,11 +668,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/room-availability/11",
+							"raw": "{{BASE_URL}}/api/v1/room-availability/11",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -719,11 +694,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/orders",
+							"raw": "{{BASE_URL}}/api/v1/orders",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -739,11 +713,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/order-items/1",
+							"raw": "{{BASE_URL}}/api/v1/order-items/1",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -760,11 +733,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/order-items/1",
+							"raw": "{{BASE_URL}}/api/v1/order-items/1",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -781,11 +753,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/order-items",
+							"raw": "{{BASE_URL}}/api/v1/order-items",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -807,11 +778,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/order-guests/1",
+							"raw": "{{BASE_URL}}/api/v1/order-guests/1",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
@@ -834,11 +804,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8000/api/v1/order-items/1",
+							"raw": "{{BASE_URL}}/api/v1/order-items/1",
 							"host": [
-								"localhost"
+								"{{BASE_URL}}"
 							],
-							"port": "8000",
 							"path": [
 								"api",
 								"v1",
