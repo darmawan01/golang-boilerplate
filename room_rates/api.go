@@ -35,7 +35,7 @@ func (api *RoomRatesApi) all(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", roomRates, 0, 0, 0),
+		utils.DataFormat("Success !", roomRates),
 	)
 }
 
@@ -93,7 +93,7 @@ func (api *RoomRatesApi) detail(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", room, 0, 0, 0),
+		utils.DataFormat("Success !", room),
 	)
 
 }

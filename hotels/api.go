@@ -22,6 +22,7 @@ func (api *HotelsApi) Register() {
 	api.Router.Handle("/hotels/{id}", http.HandlerFunc(api.detail)).Methods("GET")
 	api.Router.Handle("/hotels/{id}", http.HandlerFunc(api.update)).Methods("PUT")
 	api.Router.Handle("/hotels/{id}", http.HandlerFunc(api.delete)).Methods("DELETE")
+	api.Router.Handle("/hotels/{id}/room-rates", http.HandlerFunc(api.roomRatesByHotel)).Methods("GET")
 
 	log.Println("HotelsApi registered")
 }
@@ -36,7 +37,7 @@ func (api *HotelsApi) all(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", hotels, 0, 0, 0),
+		utils.DataFormat("Success !", hotels),
 	)
 }
 
@@ -98,7 +99,7 @@ func (api *HotelsApi) detail(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", hotel, 0, 0, 0),
+		utils.DataFormat("Success !", hotel),
 	)
 
 }
@@ -198,4 +199,32 @@ func (api *HotelsApi) delete(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(w, http.StatusOK, map[string]interface{}{
 		"messages": "Success !",
 	})
+}
+
+func (api *HotelsApi) roomRatesByHotel(w http.ResponseWriter, r *http.Request) {
+	hotelId := utils.GetIDParam(r)
+	if utils.IsEmpty(hotelId) {
+		utils.RespondwithJSON(w, http.StatusBadRequest,
+			utils.ErrFormat("Required hotel_id as param", nil),
+		)
+	}
+
+	id, err := strconv.Atoi(hotelId)
+	if err != nil {
+		utils.RespondwithJSON(w, http.StatusBadRequest,
+			utils.ErrFormat("Type of hotel_id is invalid", nil),
+		)
+	}
+	hotel, err := api.roomRatesByHotelHandler(id)
+	if err != nil {
+		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		return
+	}
+
+	utils.RespondwithJSON(
+		w,
+		http.StatusOK,
+		utils.DataFormat("Success !", hotel),
+	)
+
 }

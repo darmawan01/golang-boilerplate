@@ -35,7 +35,7 @@ func (api *GuestsApi) all(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", guests, 0, 0, 0),
+		utils.DataFormat("Success !", guests),
 	)
 }
 
@@ -92,7 +92,7 @@ func (api *GuestsApi) detail(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", guest, 0, 0, 0),
+		utils.DataFormat("Success !", guest),
 	)
 
 }

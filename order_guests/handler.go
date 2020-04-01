@@ -6,7 +6,7 @@ import (
 	"github.com/jackc/pgx"
 )
 
-func (api *OrderGuestSApi) getByOrder(orderId int) (orderGuests []OrderGuest, err error) {
+func (api *OrderGuestsApi) getByOrder(orderId int) (orderGuests []OrderGuest, err error) {
 
 	var rows *pgx.Rows
 	if rows, err = api.Db.Query(`SELECT * FROM order_guests WHERE order_id=$1`, orderId); err != nil {
@@ -35,10 +35,10 @@ func (api *OrderGuestSApi) getByOrder(orderId int) (orderGuests []OrderGuest, er
 	return
 }
 
-func (api *OrderGuestSApi) addHandler(orderItem OrderGuest) (lastInsertedId int, err error) {
+func (api *OrderGuestsApi) AddHandler(orderItem OrderGuest) (lastInsertedId int, err error) {
 	if err = api.Db.QueryRow(`
-		INSERT INTO order_items (order_id, name, email, phone_number) VALUES($1, $2, $3, $4) RETURNING id`,
-		orderItem.OrderId, orderItem.Name, orderItem.Email).Scan(&lastInsertedId); err != nil {
+		INSERT INTO order_guests (order_id, name, email, phone_number) VALUES($1, $2, $3, $4) RETURNING id`,
+		orderItem.OrderId, orderItem.Name, orderItem.Email, orderItem.PhoneNumber).Scan(&lastInsertedId); err != nil {
 		log.Println("addHandler(): ", err.Error())
 		return
 	}

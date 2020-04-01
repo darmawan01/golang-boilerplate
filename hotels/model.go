@@ -8,3 +8,18 @@ type Hotel struct {
 	Latitute  string `json:"latitute" validate:"required"`
 	Longitude string `json:"longitude" validate:"required"`
 }
+
+type roomRates struct {
+	Price float64 `json:"price"`
+	Date  string  `json:"date"`
+}
+
+type hotelRoom struct {
+	RoomName   string      `json:"room"`
+	RoomPrices []roomRates `json:"prices"`
+}
+
+type hotelRates struct {
+	HotelName string      `json:"hotel"`
+	Rooms     []hotelRoom `json:"rooms"`
+}

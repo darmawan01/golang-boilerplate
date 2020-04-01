@@ -35,10 +35,10 @@ func (api *OrderItemsApi) getByOrder(orderId int) (orderItems []OrderItem, err e
 	return
 }
 
-func (api *OrderItemsApi) addHandler(orderItem OrderItem) (lastInsertedId int, err error) {
+func (api *OrderItemsApi) AddHandler(orderItem OrderItem) (lastInsertedId int, err error) {
 	if err = api.Db.QueryRow(`
 		INSERT INTO order_items (order_id, room_id, quantity, price) VALUES($1, $2, $3, $4) RETURNING id`,
-		orderItem.OrderId, orderItem.RoomId, orderItem.Quantity).Scan(&lastInsertedId); err != nil {
+		orderItem.OrderId, orderItem.RoomId, orderItem.Quantity, orderItem.Price).Scan(&lastInsertedId); err != nil {
 		log.Println("addHandler(): ", err.Error())
 		return
 	}

@@ -22,13 +22,10 @@ func RespondwithJSON(w http.ResponseWriter, code int, payload interface{}) {
 }
 
 // DataFormat help to format data response
-func DataFormat(msg string, data interface{}, total, page, limit int) interface{} {
+func DataFormat(msg string, data interface{}) interface{} {
 	result := map[string]interface{}{
-		"msg":   msg,
-		"data":  data,
-		"total": total,
-		"page":  page,
-		"limit": limit,
+		"msg":  msg,
+		"data": data,
 	}
 	return result
 }
@@ -49,13 +46,13 @@ func GetIDParam(r *http.Request) string {
 }
 
 // GetQueryParam Help to get query param by key
-func GetQueryParam(r *http.Request, key ...string) []string {
-	querys := []string{}
+func GetQueryParam(r *http.Request, key ...string) map[string]string {
+	queryQV := make(map[string]string)
 	for _, q := range key {
 		query := r.URL.Query().Get(q)
-		querys = append(querys, query)
+		queryQV[q] = query
 	}
-	return querys
+	return queryQV
 }
 
 // IsEmpty validate is value exist

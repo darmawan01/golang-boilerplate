@@ -10,18 +10,18 @@ import (
 	"github.com/jackc/pgx"
 )
 
-type OrderGuestSApi struct {
+type OrderGuestsApi struct {
 	Router *mux.Router
 	Db     *pgx.ConnPool
 }
 
-func (api *OrderGuestSApi) Register() {
+func (api *OrderGuestsApi) Register() {
 	api.Router.Handle("/order-guests/{id}", http.HandlerFunc(api.detail)).Methods("GET")
 
-	log.Println("OrderGuestSApi registered")
+	log.Println("OrderGuestsApi registered")
 }
 
-func (api *OrderGuestSApi) detail(w http.ResponseWriter, r *http.Request) {
+func (api *OrderGuestsApi) detail(w http.ResponseWriter, r *http.Request) {
 
 	orderId := utils.GetIDParam(r)
 	if utils.IsEmpty(orderId) {
@@ -42,7 +42,7 @@ func (api *OrderGuestSApi) detail(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", order, 0, 0, 0),
+		utils.DataFormat("Success !", order),
 	)
 
 }

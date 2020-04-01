@@ -1,6 +1,7 @@
 package orders
 
 import (
+	"encoding/json"
 	"kodingworks/utils"
 	"log"
 	"net/http"
@@ -21,6 +22,8 @@ func (api *OrdersApi) Register() {
 	api.Router.Handle("/orders/{id}", http.HandlerFunc(api.detail)).Methods("GET")
 	api.Router.Handle("/orders/{id}", http.HandlerFunc(api.update)).Methods("PUT")
 
+	api.Router.Handle("/order/reports", http.HandlerFunc(api.reports)).Methods("GET")
+
 	log.Println("OrdersApi registered")
 }
 
@@ -34,13 +37,14 @@ func (api *OrdersApi) all(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", roomRates, 0, 0, 0),
+		utils.DataFormat("Success !", roomRates),
 	)
 }
 
 func (api *OrdersApi) add(w http.ResponseWriter, r *http.Request) {
-	order, err := api.bodyToStruct(r.Body)
-	if err != nil {
+	var order OrderRequests
+
+	if err := json.NewDecoder(r.Body).Decode(&order); err != nil {
 		utils.RespondwithJSON(w, http.StatusBadRequest,
 			utils.ErrFormat("Invalid body", nil),
 		)
@@ -56,7 +60,6 @@ func (api *OrdersApi) add(w http.ResponseWriter, r *http.Request) {
 
 	lastInsertedId, err := api.addHandler(order)
 	if err != nil {
-		log.Println(err)
 		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
 		return
 
@@ -88,11 +91,15 @@ func (api *OrdersApi) detail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	order, err := api.detailHandler(id)
+	if err != nil {
+		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		return
+	}
 
 	utils.RespondwithJSON(
 		w,
 		http.StatusOK,
-		utils.DataFormat("Success !", order, 0, 0, 0),
+		utils.DataFormat("Success !", order),
 	)
 
 }
@@ -128,6 +135,10 @@ func (api *OrdersApi) update(w http.ResponseWriter, r *http.Request) {
 	}
 
 	order, err := api.detailHandler(id)
+	if err != nil {
+		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		return
+	}
 
 	if updated.HotelId != order.HotelId {
 		order.HotelId = updated.HotelId
@@ -163,4 +174,21 @@ func (api *OrdersApi) update(w http.ResponseWriter, r *http.Request) {
 	utils.RespondwithJSON(w, http.StatusOK, map[string]interface{}{
 		"messages": "Success !",
 	})
+}
+
+func (api *OrdersApi) reports(w http.ResponseWriter, r *http.Request) {
+	reqParams := []string{"month", "year", "hotel", "group_by"}
+	param := utils.GetQueryParam(r, reqParams...)
+
+	report, err := api.reportsHandler(param)
+	if err != nil {
+		utils.RespondwithJSON(w, http.StatusInternalServerError, nil)
+		return
+	}
+
+	utils.RespondwithJSON(
+		w,
+		http.StatusOK,
+		utils.DataFormat("Success !", report),
+	)
 }
