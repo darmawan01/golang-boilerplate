@@ -137,6 +137,27 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Room Rates By Hotel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/hotels/1/room-rates",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"1",
+								"room-rates"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -712,16 +733,25 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hotel_id\": 3,\n    \"guest_id\": 3,\n    \"status\": \"PAID\",\n    \"checkin_at\": \"2020-04-01T21:03:07.691858Z\",\n    \"checkout_at\": \"2020-04-03T21:03:07.691858Z\",\n    \"created_at\": \"2020-03-30T21:17:46.552604Z\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/order-items/1",
+							"raw": "{{BASE_URL}}/api/v1/orders/3",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"order-items",
-								"1"
+								"orders",
+								"3"
 							]
 						}
 					},
@@ -733,14 +763,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/order-items/1",
+							"raw": "{{BASE_URL}}/api/v1/orders/1",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"order-items",
+								"orders",
 								"1"
 							]
 						}
@@ -752,15 +782,62 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"hotel_id\": 2,\n    \"guest_id\": 2,\n    \"status\": \"READY\",\n    \"checkin_at\": \"2020-04-01T21:03:07.691858Z\",\n    \"checkout_at\": \"2020-04-03T21:03:07.691858Z\",\n    \"order_items\": [\n        {\n            \"room_id\": 1,\n            \"quantity\": 2,\n            \"price\": 30000\n        },\n        {\n            \"room_id\": 2,\n            \"quantity\": 1,\n            \"price\": 30000\n        }\n    ],\n    \"order_guests\": {\n    \t\"name\": \"Mahsur\",\n    \t\"email\": \"mahsur@gmail.com\",\n    \t\"phone_number\": \"097862332\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/order-items",
+							"raw": "{{BASE_URL}}/api/v1/orders",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"order-items"
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Orders Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/v1/order/reports?month=4&year=2020&hotel=2&group_by=day",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"reports"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "4"
+								},
+								{
+									"key": "year",
+									"value": "2020"
+								},
+								{
+									"key": "hotel",
+									"value": "2"
+								},
+								{
+									"key": "group_by",
+									"value": "day"
+								}
 							]
 						}
 					},
@@ -778,7 +855,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/order-guests/1",
+							"raw": "{{BASE_URL}}/api/v1/order-guests/14",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -786,7 +863,7 @@
 								"api",
 								"v1",
 								"order-guests",
-								"1"
+								"14"
 							]
 						}
 					},
@@ -804,7 +881,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/v1/order-items/1",
+							"raw": "{{BASE_URL}}/api/v1/order-items/14",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -812,7 +889,7 @@
 								"api",
 								"v1",
 								"order-items",
-								"1"
+								"14"
 							]
 						}
 					},
