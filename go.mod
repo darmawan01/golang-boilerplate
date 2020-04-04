@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/360EntSecGroup-Skylar/excelize v1.4.1 // indirect
 	github.com/SebastiaanKlippert/go-wkhtmltopdf v1.5.0 // indirect
+	github.com/docker/go-metrics v0.0.1 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-redis/redis v6.15.7+incompatible // indirect
 	github.com/gofrs/uuid v3.2.0+incompatible // indirect
@@ -14,6 +15,8 @@ require (
 	github.com/jackc/fake v0.0.0-20150926172116-812a484cc733 // indirect
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/leodido/go-urn v1.2.0 // indirect
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
+	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/onsi/ginkgo v1.12.0 // indirect
 	github.com/onsi/gomega v1.9.0 // indirect
 	github.com/satori/go.uuid v1.2.0

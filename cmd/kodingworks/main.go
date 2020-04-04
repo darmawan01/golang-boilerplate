@@ -35,6 +35,8 @@ var config *conf
 
 func main() {
 
+	log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds | log.Lshortfile)
+
 	viper.SetConfigFile("./config.json")
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error reading config file, %s", err)
@@ -78,7 +80,7 @@ func main() {
 	// Init DB
 	dbConnPool := initDb(config)
 
-	router := mux.NewRouter()
+	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", indexHandler).Methods("GET") // root route
 	api := router.PathPrefix("/api/v1").Subrouter()     // Set api route prefix
 
